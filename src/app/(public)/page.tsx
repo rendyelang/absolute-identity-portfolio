@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import LeftSidebar from "@/components/public/LeftSidebar";
 import AboutSection from "@/components/public/AboutSection";
