@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // hashed
+}
+
+model Profile {
+  id          String  @id @default(cuid())
+  name        String
+  title       String  // e.g., "Mahasiswa Ilmu Komputer"
+  titleEn     String? // e.g., "CS Student & Developer"
+  bio         String
+  bioEn       String?
+  avatarUrl   String?
+  resumeUrl   String? // path to CV PDF
+  githubUrl   String?
+  linkedinUrl String?
+  email       String?
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  title       String   // e.g., "Magang Frontend Developer"
+  titleEn     String?  // e.g., "Frontend Developer Intern"
+  company     String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String
+  descriptionEn String?
+  order       Int      @default(0)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  titleEn     String?
+  description String
+  descriptionEn String?
+  longDesc    String?
+  longDescEn  String?
+  imageUrl    String?  // project screenshot/overview image
+  liveUrl     String?
+  repoUrl     String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  tags        Tag[]
+  techStacks  TechStack[]
+  createdAt   DateTime @default(now())
+}
+
+model Tag {
+  id       String    @id @default(cuid())
+  name     String    @unique  // "Web", "Mobile", "AI", etc.
+  color    String?   // optional accent color
+  projects Project[]
+}
+
+model TechStack {
+  id       String    @id @default(cuid())
+  name     String    @unique  // "React", "TailwindCSS", "Python", etc.
+  iconUrl  String?   // URL or path to the tech icon
+  projects Project[]
+}
