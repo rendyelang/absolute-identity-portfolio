@@ -4,18 +4,22 @@ import LeftSidebar from "@/components/public/LeftSidebar";
 import AboutSection from "@/components/public/AboutSection";
 import ExperienceSection from "@/components/public/ExperienceSection";
 import ProjectsSection from "@/components/public/ProjectsSection";
+import CertificateSection from "@/components/public/CertificateSection";
 import ContactSection from "@/components/public/ContactSection";
+import { Experience, Education, Certificate } from "@prisma/client";
 
 export const revalidate = 60; // Revalidate every minute
 
 export default async function Home() {
-  const [profile, experiences, projects, tags, techStacks] = await Promise.all([
+  const [profile, experiences, educations, projects, certificates, tags, techStacks] = await Promise.all([
     prisma.profile.findFirst(),
     prisma.experience.findMany({ orderBy: { order: "asc" } }),
+    prisma.education.findMany({ orderBy: { order: "asc" } }),
     prisma.project.findMany({
       orderBy: { order: "asc" },
       include: { tags: true, techStacks: true },
     }),
+    prisma.certificate.findMany({ orderBy: { order: "asc" } }),
     prisma.tag.findMany({ orderBy: { name: "asc" } }),
     prisma.techStack.findMany({ orderBy: { name: "asc" } }),
   ]);
@@ -28,8 +32,9 @@ export default async function Home() {
 
       <div className="lg:w-[52%] pt-12 lg:pt-24 pb-24 flex flex-col gap-24 lg:gap-32">
         <AboutSection profile={profile} techStacks={techStacks} />
-        <ExperienceSection experiences={experiences} />
+        <ExperienceSection experiences={experiences} educations={educations} />
         <ProjectsSection projects={projects} />
+        <CertificateSection certificates={certificates} />
         <ContactSection profile={profile} />
       </div>
     </>
