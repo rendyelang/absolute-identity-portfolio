@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
@@ -37,11 +37,23 @@ model Experience {
   titleEn     String?  // e.g., "Frontend Developer Intern"
   company     String
   location    String?
+  logoUrl     String?  // url to the company/institution logo
   startDate   DateTime
   endDate     DateTime?
   current     Boolean  @default(false)
   description String
   descriptionEn String?
+  order       Int      @default(0)
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String   // e.g., "Universitas Nusa Putra"
+  degree      String   // e.g., "S1 Teknik Informatika"
+  startDate   String   // e.g., "2023"
+  endDate     String?  // e.g., "Sekarang" or "2027"
+  gpa         String?  // e.g., "3.94"
+  logoUrl     String?  // url to the school's logo
   order       Int      @default(0)
 }
 
@@ -75,4 +87,17 @@ model TechStack {
   name     String    @unique  // "React", "TailwindCSS", "Python", etc.
   iconUrl  String?   // URL or path to the tech icon
   projects Project[]
+}
+
+model Certificate {
+  id            String   @id @default(cuid())
+  title         String
+  titleEn       String?
+  issuer        String
+  date          String
+  description   String?
+  descriptionEn String?
+  imageUrl      String
+  credentialUrl String?
+  order         Int      @default(0)
 }

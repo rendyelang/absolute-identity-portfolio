@@ -12,7 +12,7 @@ export default function LeftSidebar({ profile }: { profile: any }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "contact"];
+      const sections = ["about", "experience", "projects", "certificates", "contact"];
       let current = "about";
 
       for (const section of sections) {
@@ -94,22 +94,26 @@ export default function LeftSidebar({ profile }: { profile: any }) {
         </motion.div>
       </div>
 
-      <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="hidden lg:flex flex-col gap-4 font-mono text-xs font-semibold tracking-widest">
-        <a href="#about" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "about" ? "text-text" : "text-text-muted hover:text-text"} transition-colors`}>
-          <span className={`h-px transition-all duration-300 ${activeSection === "about" ? "w-16 bg-text" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
-          <span className={activeSection === "about" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>{t("nav_about")}</span>
+      <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="hidden lg:flex flex-col gap-4 font-mono text-xs tracking-widest">
+        <a href="#about" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "about" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
+          <span className={`h-px transition-all duration-300 ${activeSection === "about" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
+          <span className={activeSection === "about" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>01. {t("nav_about")}</span>
         </a>
-        <a href="#experience" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "experience" ? "text-text" : "text-text-muted hover:text-text"} transition-colors`}>
-          <span className={`h-px transition-all duration-300 ${activeSection === "experience" ? "w-16 bg-text" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
-          <span className={activeSection === "experience" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>{t("nav_experience")}</span>
+        <a href="#experience" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "experience" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
+          <span className={`h-px transition-all duration-300 ${activeSection === "experience" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
+          <span className={activeSection === "experience" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>02. {t("nav_experience")}</span>
         </a>
-        <a href="#projects" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "projects" ? "text-text" : "text-text-muted hover:text-text"} transition-colors`}>
-          <span className={`h-px transition-all duration-300 ${activeSection === "projects" ? "w-16 bg-text" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
-          <span className={activeSection === "projects" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>{t("nav_projects")}</span>
+        <a href="#projects" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "projects" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
+          <span className={`h-px transition-all duration-300 ${activeSection === "projects" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
+          <span className={activeSection === "projects" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>03. {t("nav_projects")}</span>
         </a>
-        <a href="#contact" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "contact" ? "text-text" : "text-text-muted hover:text-text"} transition-colors`}>
-          <span className={`h-px transition-all duration-300 ${activeSection === "contact" ? "w-16 bg-text" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
-          <span className={activeSection === "contact" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>{t("nav_contact")}</span>
+        <a href="#certificates" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "certificates" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
+          <span className={`h-px transition-all duration-300 ${activeSection === "certificates" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
+          <span className={activeSection === "certificates" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>04. {t("nav_certificates")}</span>
+        </a>
+        <a href="#contact" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "contact" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
+          <span className={`h-px transition-all duration-300 ${activeSection === "contact" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
+          <span className={activeSection === "contact" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>05. {t("nav_contact")}</span>
         </a>
       </motion.nav>
     </div>

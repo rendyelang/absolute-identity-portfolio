@@ -158,7 +158,25 @@ export default function ProjectsPage() {
               <input type="url" value={formData.repoUrl} onChange={(e) => setFormData({ ...formData, repoUrl: e.target.value })} className="w-full bg-surface border border-border rounded px-3 py-2" />
             </div>
             <div className="md:col-span-2 p-4 border border-border rounded bg-surface/50">
-              <label className="block text-sm font-bold mb-3">Tech Stacks (Used as Tags)</label>
+              <label className="block text-sm font-bold mb-3">Project Categories (Tags)</label>
+              <div className="flex flex-wrap gap-2">
+                {availableTags.map((tag) => (
+                  <button
+                    key={tag.id}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, tags: toggleArrayItem(formData.tags, tag.id) })}
+                    className={`px-3 py-1 text-sm rounded-full border transition-colors flex items-center gap-2 ${formData.tags.includes(tag.id) ? "bg-accent border-accent text-bg font-bold" : "border-border text-text-muted hover:border-accent"}`}
+                  >
+                    {tag.color && (
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: tag.color }} />
+                    )}
+                    {tag.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="md:col-span-2 p-4 border border-border rounded bg-surface/50">
+              <label className="block text-sm font-bold mb-3">Tech Stacks</label>
               <div className="flex flex-wrap gap-2">
                 {availableTechStacks.map((tech) => (
                   <button
@@ -230,7 +248,8 @@ export default function ProjectsPage() {
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1 mb-1">
                       {project.tags.map((t: Tag) => (
-                        <span key={t.id} className="text-xs px-1.5 bg-surface border border-border rounded">
+                        <span key={t.id} className="text-xs px-1.5 py-0.5 bg-surface border border-border rounded flex items-center gap-1">
+                          {t.color && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: t.color }}></span>}
                           {t.name}
                         </span>
                       ))}

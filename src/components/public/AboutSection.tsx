@@ -22,8 +22,8 @@ export default function AboutSection({ profile, techStacks }: { profile: Profile
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }} className="space-y-6 text-base lg:text-lg text-text-muted leading-relaxed">
         <p>
           {language === "ID"
-            ? "Halo! Nama saya Rendi, tapi kebanyakan orang memanggil saya Rendy. Saya suka membuat hal-hal yang 'hidup' di perangkat mobile dan web. Ketertarikan saya terhadap dunia IT Development dimulai sejak lama."
-            : "Hi! My name is Rendi, but most people call me Rendy. I love creating things that 'live' on mobile devices and the web. My interest in IT Development started a long time ago."}
+            ? "Saya adalah seorang mahasiswa tahun ke-3 program studi Teknik Informatika di Universitas Nusa Putra Sukabumi dengan IPK saat ini 3.94. Memiliki minat dan keterampilan di bidang Software & AI Engineer dengan pengalaman 3 tahun belajar. Saya merupakan pribadi yang selalu berusaha memberikan hasil terbaik melalui pembelajaran berkelanjutan dan perhatian terhadap detail. Terbuka terhadap tantangan baru serta memiliki semangat tinggi untuk berkembang."
+            : "I am a third-year student majoring in Computer Science at Nusa Putra University in Sukabumi with a current GPA of 3.94. I have an interest and skills in the field of Software & AI Engineering with 3 years of learning experience. I am a person who always strives to deliver the best results through continuous learning and attention to detail. I am open to new challenges and have a strong desire to grow."}
         </p>
 
         <p className="whitespace-pre-line">{language === "EN" && profile.bioEn ? profile.bioEn : profile.bio}</p>

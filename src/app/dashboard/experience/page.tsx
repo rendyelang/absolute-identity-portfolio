@@ -21,6 +21,7 @@ export default function ExperiencePage() {
     current: false,
     description: "",
     descriptionEn: "",
+    logoUrl: "",
     order: 0,
   });
 
@@ -81,6 +82,7 @@ export default function ExperiencePage() {
       current: exp.current,
       description: exp.description,
       descriptionEn: exp.descriptionEn || "",
+      logoUrl: exp.logoUrl || "",
       order: exp.order,
     });
     setShowForm(true);
@@ -89,7 +91,7 @@ export default function ExperiencePage() {
   const resetForm = () => {
     setEditingId(null);
     setShowForm(false);
-    setFormData({ title: "", titleEn: "", company: "", location: "", startDate: "", endDate: "", current: false, description: "", descriptionEn: "", order: 0 });
+    setFormData({ title: "", titleEn: "", company: "", location: "", startDate: "", endDate: "", current: false, description: "", descriptionEn: "", logoUrl: "", order: 0 });
   };
 
   return (
@@ -157,6 +159,10 @@ export default function ExperiencePage() {
             <div>
               <label className="block text-sm font-medium mb-1 text-accent">Description (EN)</label>
               <textarea value={formData.descriptionEn} onChange={(e) => setFormData({ ...formData, descriptionEn: e.target.value })} rows={4} className="w-full bg-surface border border-accent/50 rounded px-3 py-2" />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium mb-1">Logo URL (Optional)</label>
+              <input type="url" value={formData.logoUrl} onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })} className="w-full bg-surface border border-border rounded px-3 py-2" placeholder="https://" />
             </div>
           </div>
 

@@ -5,10 +5,10 @@ import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {
-    const experiences = await prisma.experience.findMany({
+    const certificates = await prisma.certificate.findMany({
       orderBy: { order: "asc" },
     });
-    return NextResponse.json(experiences);
+    return NextResponse.json(certificates);
   } catch (error) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
@@ -20,23 +20,22 @@ export async function POST(req: Request) {
     if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
     const data = await req.json();
-    const newExperience = await prisma.experience.create({
+
+    const newCert = await prisma.certificate.create({
       data: {
         title: data.title,
         titleEn: data.titleEn || null,
-        company: data.company,
-        location: data.location,
-        logoUrl: data.logoUrl || null,
-        startDate: new Date(data.startDate),
-        endDate: data.endDate ? new Date(data.endDate) : null,
-        current: data.current || false,
-        description: data.description,
+        issuer: data.issuer,
+        date: data.date,
+        description: data.description || null,
         descriptionEn: data.descriptionEn || null,
+        imageUrl: data.imageUrl,
+        credentialUrl: data.credentialUrl || null,
         order: data.order || 0,
       },
     });
 
-    return NextResponse.json(newExperience, { status: 201 });
+    return NextResponse.json(newCert, { status: 201 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
