@@ -3,13 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, User, Briefcase, FolderKanban, Tags, Layers, LogOut, ArrowLeft, Menu, X } from "lucide-react";
+import { LayoutDashboard, User, Briefcase, FolderKanban, Tags, Layers, LogOut, ArrowLeft, Menu, X, GraduationCap, Award } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 const sidebarLinks = [
   { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
   { name: "Profile", href: "/dashboard/profile", icon: User },
   { name: "Experience", href: "/dashboard/experience", icon: Briefcase },
+  { name: "Education", href: "/dashboard/education", icon: GraduationCap },
+  { name: "Certificates", href: "/dashboard/certificates", icon: Award },
   { name: "Projects", href: "/dashboard/projects", icon: FolderKanban },
   { name: "Tags", href: "/dashboard/tags", icon: Tags },
   { name: "Tech Stacks", href: "/dashboard/tech-stacks", icon: Layers },
