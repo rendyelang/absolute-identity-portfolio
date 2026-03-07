@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: #0f172a; /* Deep Slate / Purple-ish Black */
+  --color-surface: #1e293b; /* Elevated Slate */
+  --color-card: #1e293b; /* Card background */
+  --color-border: #334155; /* Subtle Border */
+  --color-accent: #22d3ee; /* Glow Cyan */
+  --color-accent-2: #06b6d4; /* Darker Cyan */
+  --color-text: #e2e8f0; /* Off White / Light Gray */
+  --color-text-muted: #94a3b8; /* Muted Slate */
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: inherit;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Utilities */
+@layer utilities {
+  .glass {
+    @apply bg-surface/60 backdrop-blur-md border border-border;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-2;
+  }
 }
