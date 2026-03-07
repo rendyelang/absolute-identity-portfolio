@@ -26,6 +26,7 @@ export async function POST(req: Request) {
         titleEn: data.titleEn || null,
         company: data.company,
         location: data.location,
+        logoUrl: data.logoUrl || null,
         startDate: new Date(data.startDate),
         endDate: data.endDate ? new Date(data.endDate) : null,
         current: data.current || false,
