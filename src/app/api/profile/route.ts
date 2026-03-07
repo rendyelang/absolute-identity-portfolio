@@ -27,6 +27,7 @@ export async function PUT(req: Request) {
 
     if (!profile) {
       const newProfile = await prisma.profile.create({
+        data: {
           name: data.name,
           title: data.title,
           titleEn: data.titleEn || null,
