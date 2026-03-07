@@ -20,7 +20,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithRel
   return (
     <section id="projects" className="scroll-mt-24">
       {/* Mobile Sticky Header */}
-      <div className="sticky top-0 z-20 -mx-6 mb-4 bg-bg/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
+      <div className="sticky top-0 z-30 -mx-6 mb-4 bg-bg/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
         <h2 className="text-sm font-bold tracking-widest text-text uppercase flex items-center gap-4">
           <span className="text-accent font-mono">03.</span> {t("nav_projects")}
           <span className="h-px bg-border grow"></span>
@@ -40,8 +40,19 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithRel
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group relative flex flex-col sm:flex-row gap-6 p-4 -mx-4 rounded-xl hover:bg-surface/50 transition-all border border-transparent hover:border-border/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.1)]"
           >
+            {/* Tags Positioned Top Right */}
+            {project.tags && project.tags.length > 0 && (
+              <div className="absolute top-4 right-4 z-20 flex flex-wrap gap-2 justify-end">
+                {project.tags.map((tag) => (
+                  <span key={tag.id} className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-accent/30 bg-bg/80 backdrop-blur text-accent flex items-center gap-1.5 shadow-sm">
+                    {tag.color && <span className="w-1.5 h-1.5 rounded-full shadow-[0_0_5px_currentColor]" style={{ backgroundColor: tag.color, color: tag.color }} />}
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            )}
             {/* Left Image */}
-            <div className="sm:w-1/3 shrink-0">
+            <div className="sm:w-1/3 shrink-0 relative">
               <div className="aspect-video rounded border border-border/50 bg-surface relative z-10 transition-transform duration-300 lg:hover:scale-[3.5] hover:-translate-y-2 hover:translate-x-2 lg:hover:translate-x-6 hover:z-50 hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]">
                 {project.imageUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -53,8 +64,8 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithRel
             </div>
 
             {/* Right Content */}
-            <div className="sm:w-2/3 flex flex-col justify-start">
-              <h3 className="text-lg font-bold text-text group-hover:text-accent flex items-center gap-1 transition-colors w-fit relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-out group-hover:after:origin-bottom-left group-hover:after:scale-x-100">
+            <div className="sm:w-2/3 flex flex-col justify-start relative">
+              <h3 className="text-lg font-bold text-text group-hover:text-accent flex items-center gap-1 transition-colors w-fit relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-out group-hover:after:origin-bottom-left group-hover:after:scale-x-100 mt-2 sm:mt-0">
                 <span>{language === "EN" && project.titleEn ? project.titleEn : project.title}</span>
                 <ArrowUpRight className="w-5 h-5 opacity-0 -translate-y-1 -translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
               </h3>
