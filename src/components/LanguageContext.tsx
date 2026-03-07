@@ -12,21 +12,21 @@ interface Translations {
 }
 
 const translations: Translations = {
-  // Navigation
-  nav_about: { ID: "01. Tentang Saya", EN: "01. About Me" },
-  nav_experience: { ID: "02. Pengalaman", EN: "02. Experience" },
-  nav_projects: { ID: "03. Proyek", EN: "03. Projects" },
-  nav_contact: { ID: "04. Kontak", EN: "04. Contact" },
+  nav_about: { ID: "Tentang Saya", EN: "About Me" },
+  nav_experience: { ID: "Pengalaman", EN: "Experience" },
+  nav_projects: { ID: "Proyek", EN: "Projects" },
+  nav_certificates: { ID: "Sertifikat", EN: "Certificates" },
+  nav_contact: { ID: "Kontak", EN: "Contact" },
 
   // Sidebar
   greeting: { ID: "Halo, nama saya", EN: "Hi, my name is" },
   download_cv: { ID: "Unduh CV Saya", EN: "Download Resume" },
 
-  // Right Content Titles
-  about_title: { ID: "01. Tentang Saya", EN: "01. About Me" },
-  experience_title: { ID: "02. Pengalaman", EN: "02. Experience" },
-  projects_title: { ID: "03. Proyek", EN: "03. Projects" },
-  contact_title: { ID: "04. Kontak", EN: "04. Contact" },
+  about_title: { ID: "Tentang Saya", EN: "About Me" },
+  experience_title: { ID: "Pengalaman", EN: "Experience" },
+  projects_title: { ID: "Proyek", EN: "Projects" },
+  certificates_title: { ID: "Sertifikat", EN: "Certificates" },
+  contact_title: { ID: "Kontak", EN: "Contact" },
 
   // Contact section
   get_in_touch: { ID: "Hubungi Saya", EN: "Get In Touch" },

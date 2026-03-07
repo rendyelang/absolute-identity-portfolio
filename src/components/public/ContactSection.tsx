@@ -19,7 +19,7 @@ export default function ContactSection({ profile }: { profile: Profile | null })
       {/* Mobile Sticky Header */}
       <div className="sticky top-0 z-20 -mx-6 mb-4 bg-bg/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
         <h2 className="text-sm font-bold tracking-widest text-text uppercase flex items-center gap-4">
-          <span className="text-accent font-mono">04.</span> {t("nav_contact")}
+          <span className="text-accent font-mono">05.</span> {t("nav_contact")}
           <span className="h-px bg-border grow"></span>
         </h2>
       </div>
