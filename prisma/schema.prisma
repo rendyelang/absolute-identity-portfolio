@@ -101,3 +101,20 @@ model Certificate {
   credentialUrl String?
   order         Int      @default(0)
 }
+
+model Activity {
+  id            String   @id @default(cuid())
+  title         String   // e.g., "Bangkit Academy 2024"
+  titleEn       String?  // e.g., "Bangkit Academy 2024"
+  organizer     String   // e.g., "Google, GoTo, Traveloka"
+  type          String   // "bootcamp" | "competition"
+  logoUrl       String?  // organizer/event logo
+  date          String   // e.g., "Feb 2024" or "2024"
+  endDate       String?  // e.g., "Jun 2024" (null if single-day event)
+  achievement   String?  // e.g., "Juara 2 Nasional"
+  achievementEn String?  // e.g., "2nd Place National"
+  description   String   // description in Bahasa
+  descriptionEn String?  // description in English
+  certificateUrl String? // link to certificate/credential
+  order         Int      @default(0)
+}

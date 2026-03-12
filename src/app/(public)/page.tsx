@@ -24,6 +24,14 @@ export default async function Home() {
     prisma.techStack.findMany({ orderBy: { name: "asc" } }),
   ]);
 
+  // Activity table may not exist yet if migration hasn't been applied
+  let activities: any[] = [];
+  try {
+    activities = await prisma.activity.findMany({ orderBy: { order: "asc" } });
+  } catch {
+    // Table doesn't exist yet — gracefully fallback to empty array
+  }
+
   return (
     <>
       <div className="lg:w-[48%] lg:sticky lg:top-0 lg:h-screen lg:py-0">
@@ -32,7 +40,7 @@ export default async function Home() {
 
       <div className="lg:w-[52%] pt-12 lg:pt-24 pb-24 flex flex-col gap-24 lg:gap-32">
         <AboutSection profile={profile} techStacks={techStacks} />
-        <ExperienceSection experiences={experiences} educations={educations} />
+        <ExperienceSection experiences={experiences} educations={educations} activities={activities} />
         <ProjectsSection projects={projects} />
         <CertificateSection certificates={certificates} />
         <ContactSection profile={profile} />

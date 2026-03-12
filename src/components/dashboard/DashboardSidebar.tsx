@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, User, Briefcase, FolderKanban, Tags, Layers, LogOut, ArrowLeft, Menu, X, GraduationCap, Award } from "lucide-react";
+import { LayoutDashboard, User, Briefcase, FolderKanban, Tags, Layers, LogOut, ArrowLeft, Menu, X, GraduationCap, Award, Trophy } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 const sidebarLinks = [
@@ -11,6 +11,7 @@ const sidebarLinks = [
   { name: "Profile", href: "/dashboard/profile", icon: User },
   { name: "Experience", href: "/dashboard/experience", icon: Briefcase },
   { name: "Education", href: "/dashboard/education", icon: GraduationCap },
+  { name: "Activities", href: "/dashboard/activities", icon: Trophy },
   { name: "Certificates", href: "/dashboard/certificates", icon: Award },
   { name: "Projects", href: "/dashboard/projects", icon: FolderKanban },
   { name: "Tags", href: "/dashboard/tags", icon: Tags },
