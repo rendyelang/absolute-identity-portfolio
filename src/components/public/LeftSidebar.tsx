@@ -5,10 +5,20 @@ import { Github, Instagram, Linkedin, Download, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Tooltip from "@/components/public/Tooltip";
 
 export default function LeftSidebar({ profile }: { profile: any }) {
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, toggleLanguage, t, experienceTab } = useLanguage();
   const [activeSection, setActiveSection] = useState("about");
+
+  // Map experience tab to the correct nav translation key
+  const experienceNavLabel = () => {
+    switch (experienceTab) {
+      case "education": return t("nav_education");
+      case "experience": return t("nav_experience");
+      case "activities": return t("nav_activities");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +75,7 @@ export default function LeftSidebar({ profile }: { profile: any }) {
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex items-center gap-10 mb-12">
           <a
-            href={profile?.resumeUrl || "/rendy-elang-resume.pdf"}
+            href={profile?.resumeUrl || "/CV_Rendy_Elang_Lesmana.pdf"}
             download
             target="_blank"
             rel="noopener noreferrer"
@@ -76,19 +86,25 @@ export default function LeftSidebar({ profile }: { profile: any }) {
 
           <div className="flex items-center gap-5 text-text-muted">
             {profile?.githubUrl && (
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
+              <Tooltip content="GitHub" position="top">
+                <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                  <Github className="w-5 h-5" />
+                </a>
+              </Tooltip>
             )}
             {profile?.linkedinUrl && (
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
+              <Tooltip content="LinkedIn" position="top">
+                <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              </Tooltip>
             )}
             {profile?.instagramUrl && (
-              <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
+              <Tooltip content="Instagram" position="top">
+                <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              </Tooltip>
             )}
           </div>
         </motion.div>
@@ -101,7 +117,7 @@ export default function LeftSidebar({ profile }: { profile: any }) {
         </a>
         <a href="#experience" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "experience" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
           <span className={`h-px transition-all duration-300 ${activeSection === "experience" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
-          <span className={activeSection === "experience" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>02. {t("nav_experience")}</span>
+          <span className={activeSection === "experience" ? "" : "group-hover:-translate-y-0.5 transition-transform"}>02. {experienceNavLabel()}</span>
         </a>
         <a href="#projects" className={`group flex items-center gap-4 py-2 w-max ${activeSection === "projects" ? "text-accent font-bold" : "text-text-muted hover:text-text font-semibold"} transition-colors`}>
           <span className={`h-px transition-all duration-300 ${activeSection === "projects" ? "w-16 bg-accent" : "w-8 bg-border group-hover:w-16 group-hover:bg-text"}`}></span>
