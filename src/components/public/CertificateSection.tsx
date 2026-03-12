@@ -1,13 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Certificate } from "@prisma/client";
 import { useLanguage } from "@/components/LanguageContext";
-import { ArrowRight, Award } from "lucide-react";
+import { ArrowRight, Award, X } from "lucide-react";
 import Link from "next/link";
 
 export default function CertificateSection({ certificates }: { certificates: Certificate[] }) {
   const { t, language } = useLanguage();
+  const [mobilePopupImage, setMobilePopupImage] = useState<string | null>(null);
+
+  const handleCardClick = (cert: Certificate) => {
+    // Only trigger popup on mobile (< 1024px)
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      if (cert.imageUrl) {
+        setMobilePopupImage(cert.imageUrl);
+      }
+    }
+  };
 
   if (!certificates || certificates.length === 0) return null;
 
@@ -32,7 +43,8 @@ export default function CertificateSection({ certificates }: { certificates: Cer
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`group relative flex flex-col justify-end rounded-2xl bg-surface border border-border/50 hover:border-accent/40 shadow-lg transition-all duration-500 aspect-video sm:aspect-[1.3/1] md:aspect-[1.4/1]`}
+            onClick={() => handleCardClick(cert)}
+            className={`group relative flex flex-col justify-end rounded-2xl bg-surface border border-border/50 hover:border-accent/40 shadow-lg transition-all duration-500 aspect-video sm:aspect-[1.3/1] md:aspect-[1.4/1] lg:cursor-default cursor-pointer`}
           >
             {/* Base Background Image (for when hover lifts the real image away safely) */}
             <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl pointer-events-none">
@@ -41,7 +53,7 @@ export default function CertificateSection({ certificates }: { certificates: Cer
             </div>
 
             {/* FLOATING IMAGE POPUP - This scales aggressively out of bounds on hover */}
-            <div className="absolute inset-0 z-0 group-hover:z-50 rounded-2xl overflow-hidden pointer-events-none transition-all duration-500 ease-out lg:group-hover:scale-[2] group-hover:scale-[1.2] group-hover:-translate-y-4 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-transparent group-hover:border-accent/50 bg-surface">
+            <div className="absolute inset-0 z-0 group-hover:z-50 rounded-2xl overflow-hidden pointer-events-none transition-all duration-500 ease-out lg:group-hover:scale-[2] lg:group-hover:-translate-y-4 lg:group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-transparent lg:group-hover:border-accent/50 bg-surface">
               {cert.imageUrl && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={cert.imageUrl} alt={cert.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
@@ -71,6 +83,48 @@ export default function CertificateSection({ certificates }: { certificates: Cer
           </Link>
         </motion.div>
       )}
+
+      {/* Mobile Fullscreen Image Popup */}
+      <AnimatePresence>
+        {mobilePopupImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:hidden"
+            onClick={() => setMobilePopupImage(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-bg/90 backdrop-blur-md" />
+
+            {/* Close button */}
+            <button
+              onClick={() => setMobilePopupImage(null)}
+              className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-surface/80 border border-border/50 flex items-center justify-center text-text-muted hover:text-text transition-colors cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.3)]"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Certificate Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg rounded-xl overflow-hidden border border-border/50 shadow-[0_0_40px_rgba(34,211,238,0.1)]"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={mobilePopupImage}
+                alt="Certificate"
+                className="w-full h-auto object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

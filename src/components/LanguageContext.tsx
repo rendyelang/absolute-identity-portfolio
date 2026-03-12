@@ -11,9 +11,13 @@ interface Translations {
   };
 }
 
+type ExperienceTab = "education" | "experience" | "activities";
+
 const translations: Translations = {
   nav_about: { ID: "Tentang Saya", EN: "About Me" },
+  nav_education: { ID: "Pendidikan", EN: "Education" },
   nav_experience: { ID: "Pengalaman", EN: "Experience" },
+  nav_activities: { ID: "Aktivitas", EN: "Activities" },
   nav_projects: { ID: "Proyek", EN: "Projects" },
   nav_certificates: { ID: "Sertifikat", EN: "Certificates" },
   nav_contact: { ID: "Kontak", EN: "Contact" },
@@ -49,12 +53,15 @@ interface LanguageContextType {
   toggleLanguage: () => void;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  experienceTab: ExperienceTab;
+  setExperienceTab: (tab: ExperienceTab) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("ID");
+  const [experienceTab, setExperienceTab] = useState<ExperienceTab>("education");
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -79,7 +86,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return translations[key][language];
   };
 
-  return <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage, t }}>{children}</LanguageContext.Provider>;
+  return <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage, t, experienceTab, setExperienceTab }}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {

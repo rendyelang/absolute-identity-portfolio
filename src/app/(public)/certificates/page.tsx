@@ -15,7 +15,8 @@ export default async function CertificatesPage() {
   ]);
 
   return (
-    <div className="pt-24 pb-16 px-6 sm:px-12 lg:px-24 max-w-7xl mx-auto w-full lg:w-3/4">
+    <div className="pt-24 pb-16 px-6 sm:px-12 lg:px-24 max-w-7xl mx-auto">
+      
       {/* Header section */}
       <div className="mb-16">
         <h1 className="text-4xl sm:text-5xl font-playfair font-bold text-text mb-4 lg:mb-6">
@@ -27,6 +28,7 @@ export default async function CertificatesPage() {
       </div>
 
       <CertificatesListWrapper certificates={certificates} />
+
     </div>
   );
 }
