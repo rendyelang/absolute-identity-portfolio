@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import PublicLayout from "@/components/public/PublicLayout";
 import { ArrowUpRight } from "lucide-react";
 import React from 'react';
 
@@ -16,22 +15,20 @@ export default async function CertificatesPage() {
   ]);
 
   return (
-    <PublicLayout profile={profile}>
-      <div className="pt-24 pb-16 px-6 sm:px-12 lg:px-24 max-w-7xl mx-auto">
-        
-        {/* Header section */}
-        <div className="mb-16">
-          <h1 className="text-4xl sm:text-5xl font-playfair font-bold text-text mb-4 lg:mb-6">
-            <span className="text-accent">My</span> Certificates
-          </h1>
-          <p className="text-text-muted text-lg max-w-2xl leading-relaxed">
-            A comprehensive list of the certifications, courses, and credentials I have earned throughout my professional journey.
-          </p>
-        </div>
-
-        <CertificatesListWrapper certificates={certificates} />
-
+    <div className="pt-24 pb-16 px-6 sm:px-12 lg:px-24 max-w-7xl mx-auto">
+      
+      {/* Header section */}
+      <div className="mb-16">
+        <h1 className="text-4xl sm:text-5xl font-playfair font-bold text-text mb-4 lg:mb-6">
+          <span className="text-accent">My</span> Certificates
+        </h1>
+        <p className="text-text-muted text-lg max-w-2xl leading-relaxed">
+          A comprehensive list of the certifications, courses, and credentials I have earned throughout my professional journey.
+        </p>
       </div>
-    </PublicLayout>
+
+      <CertificatesListWrapper certificates={certificates} />
+
+    </div>
   );
 }
